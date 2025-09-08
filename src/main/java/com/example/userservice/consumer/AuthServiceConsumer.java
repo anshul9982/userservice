@@ -19,10 +19,11 @@ public class AuthServiceConsumer {
         this.userService = userService;
     }
 
-    @KafkaListener(topics = "${spring.kafka.topic-name}" , groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${KAFKA_TOPIC}" , groupId = "${KAFKA_GROUP}")
     public void consume(UserSignUpEventDto eventData) {
         try {
             userService.createOrUpdateUser(eventData);
+            System.out.println("Received Kafka message: " + eventData);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
