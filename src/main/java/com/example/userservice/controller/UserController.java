@@ -24,8 +24,8 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/v1/get-user/{userId}")
-    public ResponseEntity<UserSignUpEventDto> getUser(@PathVariable String userId){
+    @GetMapping("/user/v1/get-user")
+    public ResponseEntity<UserSignUpEventDto> getUser(@RequestHeader("X-Claim-Userid") String userId){
         try {
             UserSignUpEventDto user = userService.getUser(userId);
             return ResponseEntity.ok(user);
